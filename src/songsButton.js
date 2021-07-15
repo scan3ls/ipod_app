@@ -11,13 +11,20 @@ class SongsButton extends React.Component {
 
     handlePress() {
         const response = request('songs');
-        const data = JSON.parse(response.responseText).Songs;
-        let text = "";
-        data.forEach(
+        response
+        .then(res => res.json())
+        .then(data => {
+          let text = "";
+          data.Songs.forEach(
             (song) => {
                 text += `${song.name} - ${song.artist} - ${song.album}\n`;
+          });
+          this.props.updateDisplay(text);
+        })
+        .catch(err => {
+            console.log(err)
+            this.props.updateDisplay('Something went wrong');
         });
-        this.props.updateDisplay(text);
     }
 
     render() {

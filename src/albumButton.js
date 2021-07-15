@@ -11,15 +11,20 @@ class AlbumButton extends React.Component {
 
     handlePress() {
         const response = request('albums');
-        const data = JSON.parse(response.responseText).Albums;
-        let s1 = "";
-        data.forEach(
+        response
+        .then(res => res.json())
+        .then(data => {
+          let text = "";
+          data.Albums.forEach(
             (album) => {
-                console.log(album);
-                s1 += `${album.artist}\n${album.name}\nSongs: [\n ${album.songs.map((song) => `\t${song}\n`).join('')}]\n\n`
+                text += `${album.artist}\n${album.name}\nSongs: [\n ${album.songs.map((song) => `\t${song}\n`).join('')}]\n\n`
+          });
+          this.props.updateDisplay(text);
+        })
+        .catch(err => {
+            console.log(err)
+            this.props.updateDisplay('Something went wrong');
         });
-        
-        this.props.updateDisplay(`${s1}\n`);
     }
 
     render() {

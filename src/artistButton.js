@@ -11,13 +11,20 @@ class ArtistButton extends React.Component {
 
     handlePress() {
         const response = request('artists');
-        const data = JSON.parse(response.responseText).Artists;
-        let text = "";
-        data.forEach(
+        response
+        .then(res => res.json())
+        .then(data => {
+          let text = "";
+          data.Artists.forEach(
             (artist) => {
                 text += `${artist.name}\nAlbums [\n${artist.albums.map((album) => `\t${album}\n`).join('')}]\n\n`;
+          });
+          this.props.updateDisplay(text);
+        })
+        .catch(err => {
+            console.log(err)
+            this.props.updateDisplay('Something went wrong');
         });
-        this.props.updateDisplay(text);
     }
 
     render() {
