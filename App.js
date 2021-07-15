@@ -5,6 +5,7 @@ import SongsButton from './src/songsButton';
 import Conent from './src/content';
 import request from './src/util';
 import AlbumButton from './src/albumButton';
+import ArtistButton from './src/artistButton';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const response = request('albums');
-    this.displayContent(response.responseText);
+    // const response = request('albums');
+    this.displayContent('Welcome');
   }
 
   displayContent = (arg) => {
@@ -32,6 +33,7 @@ class App extends React.Component {
         <View style={styles.menu}>
           <SongsButton updateDisplay={this.displayContent}/>
           <AlbumButton updateDisplay={this.displayContent}/>
+          <ArtistButton updateDisplay={this.displayContent}/>
         </View>
       </View>
     );
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
     margin: '1rem'
   },
   content: {
+    marginBottom: '10%'
   },
   menu: {
     height: '10%',
