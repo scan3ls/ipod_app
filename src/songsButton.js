@@ -17,13 +17,13 @@ class SongsButton extends React.Component {
           let text = "";
           data.Songs.forEach(
             (song) => {
-                text += `${song.name} - ${song.artist} - ${song.album}\n`;
+                text += `${song.name} - ${song.artist} - ${song.album}\nID: ${song.id}\n\n`;
           });
           this.props.updateDisplay(text);
         })
         .catch(err => {
             console.log(err)
-            this.props.updateDisplay('Something went wrong');
+            // this.props.updateDisplay('Something went wrong');
         });
     }
 

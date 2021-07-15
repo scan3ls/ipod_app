@@ -14,16 +14,16 @@ class ArtistButton extends React.Component {
         response
         .then(res => res.json())
         .then(data => {
-          let text = "";
-          data.Artists.forEach(
-            (artist) => {
-                text += `${artist.name}\nAlbums [\n${artist.albums.map((album) => `\t${album}\n`).join('')}]\n\n`;
-          });
-          this.props.updateDisplay(text);
+            let text = "";
+            data.Artists.forEach(
+                (artist) => {
+                    text += `${artist.name}\nID: ${artist.id}\nAlbums [\n${artist.albums.map((album) => `\t${album}\n`).join('')}]\n\n`;
+            });
+            this.props.updateDisplay(text);
         })
         .catch(err => {
             console.log(err)
-            this.props.updateDisplay('Something went wrong');
+            // this.props.updateDisplay('Something went wrong');
         });
     }
 

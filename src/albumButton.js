@@ -17,13 +17,13 @@ class AlbumButton extends React.Component {
           let text = "";
           data.Albums.forEach(
             (album) => {
-                text += `${album.artist}\n${album.name}\nSongs: [\n ${album.songs.map((song) => `\t${song}\n`).join('')}]\n\n`
+                text += `${album.artist}\n${album.name}\nID: ${album.id}\nSongs: [\n ${album.songs.map((song) => `\t${song}\n`).join('')}]\n\n`
           });
           this.props.updateDisplay(text);
         })
         .catch(err => {
             console.log(err)
-            this.props.updateDisplay('Something went wrong');
+            // this.props.updateDisplay('Something went wrong');
         });
     }
 
