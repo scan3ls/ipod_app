@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import request from './util';
 
-class AlbumButton extends React.Component {
+class ArtistButton extends React.Component {
     constructor(props) {
         super(props);
 
@@ -10,16 +10,14 @@ class AlbumButton extends React.Component {
     }
 
     handlePress() {
-        const response = request('albums');
-        const data = JSON.parse(response.responseText).Albums;
-        let s1 = "";
+        const response = request('artists');
+        const data = JSON.parse(response.responseText).Artists;
+        let text = "";
         data.forEach(
-            (album) => {
-                console.log(album);
-                s1 += `${album.artist}\n${album.name}\nSongs: [\n ${album.songs.map((song) => `\t${song}\n`).join('')}]\n\n`
+            (artist) => {
+                text += `${artist.name}\nAlbums [\n${artist.albums.map((album) => `\t${album}\n`).join('')}]\n\n`;
         });
-        
-        this.props.updateDisplay(`${s1}\n`);
+        this.props.updateDisplay(text);
     }
 
     render() {
@@ -27,10 +25,10 @@ class AlbumButton extends React.Component {
             <TouchableOpacity
               onPress={this.handlePress}
               style={{}}>
-                <Text>Albums</Text>
+                <Text>Artists</Text>
             </TouchableOpacity>
         );
     }
 }
 
-export default AlbumButton;
+export default ArtistButton;
