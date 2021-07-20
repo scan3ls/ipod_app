@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import request from './util';
+import request from '../util';
 
 class ArtistButton extends React.Component {
     constructor(props) {
@@ -14,12 +14,7 @@ class ArtistButton extends React.Component {
         response
         .then(res => res.json())
         .then(data => {
-            let text = "";
-            data.Artists.forEach(
-                (artist) => {
-                    text += `${artist.name}\nID: ${artist.id}\nAlbums [\n${artist.albums.map((album) => `\t${album}\n`).join('')}]\n\n`;
-            });
-            this.props.updateDisplay(text);
+            if (data.Artists !== 'artist') this.props.updateDisplay(data, "Artists");
         })
         .catch(err => {
             console.log(err)
