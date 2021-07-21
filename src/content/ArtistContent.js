@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { sortedAlpha } from '../util';
 
 class ArtistContent extends React.Component {
     constructor(props) {
@@ -7,30 +8,12 @@ class ArtistContent extends React.Component {
     }
 
     render() {
-
-        const artists = this.props.data;
-        const sorted = artists.sort((a, b)=> (a.name > b.name) ? 1 : -1);
-        const alpha = {};
+        const alpha = sortedAlpha(this.props.data);
         const content = [];
-
-        'abcdefghijklmnopqrstuvwxyz'.split('').forEach(
-            letter => {
-                alpha[letter] = [] ;
-            }
-        );
-
-        sorted.forEach(
-            artist => {
-                const letter = artist.name[0].toLowerCase();
-                alpha[letter].push({
-                    id: `${artist.id}`,
-                    name: `${artist.name}`
-                })
-            }
-        );
 
         for (const letter in alpha) {
             if (alpha[letter].length === 0) continue;
+
             const artistList = alpha[letter].map((artist) => {
                 return <TouchableOpacity key={artist.id}>
                     <Text style={styles.artistList}>
@@ -38,6 +21,7 @@ class ArtistContent extends React.Component {
                     </Text>
                 </TouchableOpacity>
             });
+
             content.push(
                 <View key={letter}>
                     <Text style={styles.letterTag}>
