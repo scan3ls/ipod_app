@@ -28,7 +28,8 @@ export function sortedAlpha(items) {
             alpha[letter].push({
                 id: `${item.id}`,
                 name: `${item.name}`,
-                cover: `${item.cover}`
+                cover: `${item.cover}`,
+                artist: `${item.artist}`
             })
         }
     );

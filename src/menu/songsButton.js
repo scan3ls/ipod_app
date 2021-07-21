@@ -14,12 +14,7 @@ class SongsButton extends React.Component {
         response
         .then(res => res.json())
         .then(data => {
-          let text = "";
-          data.Songs.forEach(
-            (song) => {
-                text += `${song.name} - ${song.artist} - ${song.album}\nID: ${song.id}\n\n`;
-          });
-          this.props.updateDisplay(text);
+          if (data.Songs !== 'songs') this.props.updateDisplay(data, 'Songs');
         })
         .catch(err => {
             console.log(err)
