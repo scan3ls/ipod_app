@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import {Text, View} from 'react-native';
 import ArtistButton from './ArtistButton';
-import AlbumButton from '../albums/AlbumButton';
 import { sortedAlpha } from '../../util';
-import { getAlbums } from './OneArtist';
 import ContentList from '../ContentList';
 
 class ArtistContent extends React.Component {
@@ -14,22 +12,10 @@ class ArtistContent extends React.Component {
             content: <Text></Text>
         };
 
-        this.handlePress = this.handlePress.bind(this);
-    }
-
-    handlePress(id) {
-        const updateDisplay = this.props.updateDisplay;
-
-        getAlbums(id).then(data =>{
-            const content = data.map(
-                album => <AlbumButton key={album.id} album={album}/>
-            );
-            updateDisplay(<View>{content}</View>, `${data[0].artist}`);
-        });
     }
 
     render() {
-        const {data, type} = this.props;
+        const {data, type, updateDisplay} = this.props;
         const alpha = sortedAlpha(data[type]);
         const content = [];
 
@@ -37,7 +23,7 @@ class ArtistContent extends React.Component {
             if (alpha[letter].length === 0) continue;
 
             const artistList = alpha[letter].map(
-                artist => <ArtistButton key={artist.id} artist={artist} handlePress={this.handlePress}/>
+                artist => <ArtistButton key={artist.id} artist={artist} updateDisplay={updateDisplay}/>
             );
 
             content.push(<ContentList key={letter} list={artistList} letter={letter}/>);
