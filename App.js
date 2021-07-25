@@ -1,32 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import SongsButton from './src/menu/songsButton';
-import Conent from './src/content/content';
 import AlbumButton from './src/menu/albumButton';
 import ArtistButton from './src/menu/artistButton';
+import { request } from './src/util';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      content: "hello",
-      contentType: "start"
+      content: <Text></Text>,
+      contentType: ''
     };
+
+    this.displayContent = this.displayContent.bind(this);
   }
 
   componentDidMount() {
-    // const response = request('albums');
-    this.displayContent('Connecting to API ... Please Wait', "Welcome");
-    fetch('https://salty-oasis-19252.herokuapp.com')
+    const content = <Text>{'Connecting to API ... Please Wait'}</Text>
+    this.displayContent(content, "Welcome");
+    request()
     .then(res => {
-      if (res.ok) this.displayContent('Connecting to API ... Done', "Welcome");
+      const content = <Text>{'Connecting to API ... Done'}</Text>
+      if (res.ok) this.displayContent(content, "Welcome");
     }).catch(err => {
-      this.displayContent(`Connecting to API ... Error\n${err}`, "Error");
+      const content = <Text>{`Connecting to API ... Error\n${err}`}</Text>
+      this.displayContent(content, "Error");
     })
   }
 
   displayContent = (arg, type) => {
-    // console.log('arg', arg);
     this.setState({content: arg, contentType: type});
   }
 
@@ -34,7 +37,10 @@ class App extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.content}>
-          <Conent data={this.state.content} type={this.state.contentType}/>
+          <View>
+              <Text style={styles.contentHeader}>{this.state.contentType}</Text>
+          </View>
+          {this.state.content}
         </ScrollView>
         <View style={styles.menu}>
           <ArtistButton updateDisplay={this.displayContent}/>
@@ -50,12 +56,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // alignItems: 'center',
     justifyContent: 'space-between',
   },
+
   content: {
-    marginBottom: '10%'
+    marginBottom: '20%'
   },
+
   menu: {
     height: '10%',
     position: 'fixed',
@@ -65,6 +72,15 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center'
+  },
+
+  contentHeader: {
+    textAlign: 'center',
+    color: 'white',
+    backgroundColor: '#8496f8',
+    paddingTop: '1rem',
+    paddingBottom: '1rem',
+    fontSize: '3rem'
   }
 });
 
