@@ -18,7 +18,7 @@ class AllAlbums extends React.Component {
             if (alpha[letter].length === 0) continue;
 
             const albumList = alpha[letter].map(
-                (album) => <AlbumButton key={album.id} album={album}/>
+                (album) => <AlbumButton key={album.id} album={album} updateDisplay={updateDisplay}/>
             );
 
             content.push(<ContentList key={letter} list={albumList} letter={letter}/>);

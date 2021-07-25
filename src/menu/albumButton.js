@@ -16,7 +16,7 @@ class AlbumButton extends React.Component {
         .then(res => res.json())
         .then(data => {
           if (data.Albums !== 'albums') {
-              const content = <AllAlbums data={data} type='Albums'/>
+              const content = <AllAlbums data={data} type='Albums' updateDisplay={this.props.updateDisplay}/>
               this.props.updateDisplay(content, 'Albums');
           }
         })

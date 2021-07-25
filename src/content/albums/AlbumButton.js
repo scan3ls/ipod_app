@@ -1,15 +1,23 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { getSongs } from './songsByAlbum';
+import SongButton from '../songs/SongButton';
 
 class AlbumButton extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    render() {
-        const {album} = this.props;
+    handlePress(id, updateDisplay) {
+        getSongs(id).then(data => {
+            const content = data.map(song => <SongButton key={song.id} song={song} />);
+            updateDisplay(content, `${data[0].album}`);
+        });
+    }
 
-        return <TouchableOpacity style={styles.button}>
+    render() {
+        const {album, updateDisplay} = this.props;
+        return <TouchableOpacity style={styles.button} onPress={() => {this.handlePress(album.id, updateDisplay)}}>
                     <Image
                         style={styles.cover}
                         source={{uri: `${album.cover}`}}
