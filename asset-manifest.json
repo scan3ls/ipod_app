@@ -1,22 +1,22 @@
 {
   "files": {
-    "app.js": "/ipod_app/static/js/app.24b49957.chunk.js",
-    "app.js.map": "/ipod_app/static/js/app.24b49957.chunk.js.map",
+    "app.js": "/ipod_app/static/js/app.05b3aee3.chunk.js",
+    "app.js.map": "/ipod_app/static/js/app.05b3aee3.chunk.js.map",
     "runtime~app.js": "/ipod_app/static/js/runtime~app.43ca3347.js",
     "runtime~app.js.map": "/ipod_app/static/js/runtime~app.43ca3347.js.map",
-    "static/js/2.489c29f2.chunk.js": "/ipod_app/static/js/2.489c29f2.chunk.js",
-    "static/js/2.489c29f2.chunk.js.map": "/ipod_app/static/js/2.489c29f2.chunk.js.map",
+    "static/js/2.d9a03933.chunk.js": "/ipod_app/static/js/2.d9a03933.chunk.js",
+    "static/js/2.d9a03933.chunk.js.map": "/ipod_app/static/js/2.d9a03933.chunk.js.map",
     "favicon-16.png": "/ipod_app/favicon-16.png",
     "favicon-32.png": "/ipod_app/favicon-32.png",
     "favicon.ico": "/ipod_app/favicon.ico",
     "index.html": "/ipod_app/index.html",
     "manifest.json": "/ipod_app/manifest.json",
     "serve.json": "/ipod_app/serve.json",
-    "static/js/2.489c29f2.chunk.js.LICENSE.txt": "/ipod_app/static/js/2.489c29f2.chunk.js.LICENSE.txt"
+    "static/js/2.d9a03933.chunk.js.LICENSE.txt": "/ipod_app/static/js/2.d9a03933.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime~app.43ca3347.js",
-    "static/js/2.489c29f2.chunk.js",
-    "static/js/app.24b49957.chunk.js"
+    "static/js/2.d9a03933.chunk.js",
+    "static/js/app.05b3aee3.chunk.js"
   ]
 }
