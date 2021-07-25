@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { request } from '../util';
+import AllArtists from '../content/artists/AllArtists';
 
 class ArtistButton extends React.Component {
     constructor(props) {
@@ -9,16 +10,25 @@ class ArtistButton extends React.Component {
         this.handlePress = this.handlePress.bind(this);
     }
 
+    
     handlePress() {
         const response = request('artists');
         response
         .then(res => res.json())
         .then(data => {
-            if (data.Artists !== 'artist') this.props.updateDisplay(data, "Artists");
+            if (data.Artists !== 'artist') {
+                const content = (
+                    <AllArtists
+                        data={data}
+                        type="Artists"
+                        updateDisplay={this.props.updateDisplay}
+                    />
+                );
+                this.props.updateDisplay(content, "Artists")
+            };
         })
         .catch(err => {
             console.log(err)
-            // this.props.updateDisplay('Something went wrong');
         });
     }
 

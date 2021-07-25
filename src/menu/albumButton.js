@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { request } from '../util';
+import  AllAlbums  from '../content/albums/AllAlbums';
 
 class AlbumButton extends React.Component {
     constructor(props) {
@@ -14,11 +15,13 @@ class AlbumButton extends React.Component {
         response
         .then(res => res.json())
         .then(data => {
-          if (data.Albums !== 'albums') this.props.updateDisplay(data, 'Albums');
+          if (data.Albums !== 'albums') {
+              const content = <AllAlbums data={data} type='Albums'/>
+              this.props.updateDisplay(content, 'Albums');
+          }
         })
         .catch(err => {
             console.log(err)
-            // this.props.updateDisplay('Something went wrong');
         });
     }
 

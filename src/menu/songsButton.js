@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { request } from '../util';
+import AllSongs from '../content/songs/AllSongs';
 
 class SongsButton extends React.Component {
     constructor(props) {
@@ -14,11 +15,13 @@ class SongsButton extends React.Component {
         response
         .then(res => res.json())
         .then(data => {
-          if (data.Songs !== 'songs') this.props.updateDisplay(data, 'Songs');
+          if (data.Songs !== 'songs') {
+            const content = <AllSongs data={data} type="Songs" />
+            this.props.updateDisplay(content, 'Songs');
+          }
         })
         .catch(err => {
             console.log(err)
-            // this.props.updateDisplay('Something went wrong');
         });
     }
 
